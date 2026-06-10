@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Mumbai Glam - AI Salon Marketplace | SuperXgen Buildathon 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .header .tagline {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .city-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        /* AI Chatbot Container */
+        .ai-chatbot {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeIn 1s ease;
+        }
+
+        .ai-chatbot h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-messages {
+            background: #f7f7f7;
+            border-radius: 15px;
+            padding: 15px;
+            height: 150px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .chat-input:focus {
+            border-color: #667eea;
+        }
+
+        .chat-send {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .chat-send:hover {
+            background: #5a67d8;
+        }
+
+        .user-message {
+            background: #667eea;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            max-width: 80%;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .bot-message {
+            background: #e0e0e0;
+            color: #333;
+            padding: 8px 12px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            max-width: 80%;
+        }
+
+        /* Salon Grid */
+        .section-title {
+            color: white;
+            font-size: 1.8rem;
+            margin: 30px 0 20px 0;
+        }
+
+        .salon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .salon-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .salon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .salon-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .salon-location {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .salon-rating {
+            color: #ffc107;
+            margin-bottom: 8px;
+        }
+
+        .price {
+            color: #28a745;
+            font-weight: bold;
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+
+        .book-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .book-btn:hover {
+            background: #5a67d8;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 30px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.4rem;
+            }
+            
+            .salon-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>💇‍♀️ Mumbai Glam</h1>
+            <div class="tagline">AI-Powered Beauty Salon Marketplace for Mumbai</div>
+            <div class="city-badge">🌆 Mumbai • Andheri • Bandra • Juhu • Powai</div>
+        </div>
+
+        <!-- AI Stylist Chatbot -->
+        <div class="ai-chatbot">
+            <h3>🤖 AI Stylist Assistant</h3>
+            <p style="color: #666; margin-bottom: 15px;">Tell me about your hair concerns or occasion - I'll recommend the perfect service!</p>
+            <div class="chat-messages" id="chatMessages">
+                <div class="bot-message">👋 Hi! I'm your AI Stylist. Need help? Try: "I have frizzy hair" or "Wedding style needed" or "Budget haircut"</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Ask your AI stylist anything...">
+                <button class="chat-send" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+
+        <!-- Featured Salons -->
+        <div class="section-title">✨ Featured Salons in Mumbai</div>
+        <div class="salon-grid" id="salonGrid">
+            <!-- Salons will be loaded here -->
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>🏆 Built for SuperXgen AI Startup Buildathon 2026</p>
+            <p>📍 Mumbai's #1 AI-Powered Salon Discovery Platform</p>
+            <p style="font-size: 0.8rem; margin-top: 10px;">© 2026 Mumbai Glam • Book a salon in 60 seconds</p>
+        </div>
+    </div>
+
+    <script>
+        // Sample salon data for Mumbai
+        const salons = [
+            { 
+                name: "Glamour Salon & Spa", 
+                location: "Bandra West", 
+                price: "₹500 - ₹2000", 
+                rating: 4.8,
+                services: "Hair, Makeup, Spa"
+            },
+            { 
+                name: "The Hair Lounge", 
+                location: "Andheri East", 
+                price: "₹300 - ₹1500", 
+                rating: 4.6,
+                services: "Hair, Beard, Facial"
+            },
+            { 
+                name: "Luxury Unisex Salon", 
+                location: "Juhu", 
+                price: "₹800 - ₹3000", 
+                rating: 4.9,
+                services: "Bridal, Hair, Nails"
+            },
+            { 
+                name: "Quick Cuts", 
+                location: "Powai", 
+                price: "₹200 - ₹800", 
+                rating: 4.5,
+                services: "Haircuts, Styling"
+            },
+            { 
+                name: "Monsoon Hair Care Studio", 
+                location: "Ghatkopar", 
+                price: "₹400 - ₹1200", 
+                rating: 4.7,
+                services: "Anti-Frizz, Hair Spa"
+            },
+            { 
+                name: "The Bridal Studio", 
+                location: "Dadar", 
+                price: "₹1000 - ₹5000", 
+                rating: 4.9,
+                services: "Bridal Makeup, Mehndi"
+            }
+        ];
+
+        // Display salons
+        const grid = document.getElementById('salonGrid');
+        
+        function displaySalons() {
+            salons.forEach(salon => {
+                const card = document.createElement('div');
+                card.className = 'salon-card';
+                const stars = '⭐'.repeat(Math.floor(salon.rating)) + '☆'.repeat(5 - Math.floor(salon.rating));
+                card.innerHTML = `
+                    <div class="salon-name">${salon.name}</div>
+                    <div class="salon-location">📍 ${salon.location}</div>
+                    <div class="salon-rating">${stars} ${salon.rating}</div>
+                    <div class="price">💰 ${salon.price}</div>
+                    <div style="font-size: 0.8rem; color: #666; margin-bottom: 10px;">✂️ ${salon.services}</div>
+                    <button class="book-btn" onclick="bookSalon('${salon.name}', '${salon.location}')">Book Now →</button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function bookSalon(salonName, location) {
+            alert(`✨ You selected ${salonName} (${location})\n\n📅 Booking feature: Select date & time\n💇 Services available: Hair, Styling, Spa\n🤖 AI Stylist can help you choose!\n\n🚀 Full booking system coming in the final version!`);
+        }
+
+        // AI Stylist Chatbot Logic
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message === '') return;
+            
+            // Add user message to chat
+            const chatMessages = document.getElementById('chatMessages');
+            const userDiv = document.createElement('div');
+            userDiv.className = 'user-message';
+            userDiv.textContent = message;
+            chatMessages.appendChild(userDiv);
+            
+            // Generate AI response
+            const response = getAIResponse(message);
+            
+            // Add bot response after short delay
+            setTimeout(() => {
+                const botDiv = document.createElement('div');
+                botDiv.className = 'bot-message';
+                botDiv.textContent = response;
+                chatMessages.appendChild(botDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 500);
+            
+            // Clear input
+            input.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function getAIResponse(userMessage) {
+            const msg = userMessage.toLowerCase();
+            
+            // AI Stylist logic - smart recommendations
+            if (msg.includes('frizzy') || msg.includes('monsoon') || msg.includes('humidity')) {
+                return "💇‍♀️ For Mumbai's monsoon humidity, I recommend our 'Monsoon Hair Care' package at Monsoon Hair Care Studio (Ghatkopar). Includes: Anti-Frizz Treatment + Hydrating Spa + Keratin Care. Price: ₹1200. Want me to book?";
+            }
+            else if (msg.includes('wedding') || msg.includes('bridal')) {
+                return "💍 Congratulations! For bridal beauty, The Bridal Studio (Dadar) specializes in wedding makeup (₹5000) and mehndi. Their 4.9⭐ rating makes them Mumbai's top choice. Would you like their bridal package details?";
+            }
+            else if (msg.includes('haircut') || msg.includes('men') || msg.includes('grooming')) {
+                return "✂️ For men's grooming, Quick Cuts (Powai) offers premium haircuts from ₹200. The Hair Lounge (Andheri) has excellent beard styling. Both have 4.5+ ratings. Which location works for you?";
+            }
+            else if (msg.includes('budget') || msg.includes('cheap') || msg.includes('affordable')) {
+                return "💰 Budget-friendly options: Quick Cuts (Powai) ₹200-800 or The Hair Lounge (Andheri) ₹300-1500. Both offer great value with 4.5+ ratings. Want specific service pricing?";
+            }
+            else if (msg.includes('luxury') || msg.includes('premium') || msg.includes('best')) {
+                return "👑 For luxury experience, Luxury Unisex Salon (Juhu) is Mumbai's premium choice (4.9⭐). Services: Bridal, Spa, Designer Haircuts. Price range ₹800-3000. Shall I check availability?";
+            }
+            else if (msg.includes('spa') || msg.includes('hair spa')) {
+                return "💆‍♀️ Hair Spa treatments available at Glamour Salon (Bandra) and Monsoon Hair Care (Ghatkopar). Prices start at ₹500. Which area is convenient for you?";
+            }
+            else {
+                return "✨ I'm your AI Stylist! I can help you find the perfect salon based on:\n• Budget (budget/luxury)\n• Hair concerns (frizzy/dry/fall)\n• Occasion (wedding/casual)\n• Service (haircut/spa/color)\n\nTry asking me something specific about your needs!";
+            }
+        }
+
+        // Allow Enter key to send message
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Initialize the page
+        displaySalons();
+        
+        // Add Enter key detection for chat
+        console.log("✅ Mumbai Glam is ready! AI Stylist Chatbot active.");
+    </script>
+</body>
+</html>
